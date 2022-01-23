@@ -1,13 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
+import Dashboard from "./components/Dashboard";
 import Header from "./components/Header";
 import NuevoPresupuesto from "./components/NuevoPresupuesto";
 
-
 const App = () => {
+  const [presupuesto, setPresupuesto] = useState("");
+  const [valido, setValido] = useState(false);
+
   return (
     <div>
       <Header />
-      <NuevoPresupuesto />
+      {valido ? (
+        <Dashboard />
+      ) : (
+        <NuevoPresupuesto
+          presupuesto={presupuesto}
+          setPresupuesto={setPresupuesto}
+          setValido={setValido}
+        />
+      )}
     </div>
   );
 };
