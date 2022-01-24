@@ -8,14 +8,14 @@ const NuevoPresupuesto = ({ presupuesto, setPresupuesto, setValido }) => {
     e.preventDefault();
 
     if (!Number(presupuesto) || Number(presupuesto) < 0) {
-      setMensaje(`'${presupuesto}' No es un presupuesto válido...`);
+      setMensaje(`${presupuesto} No es un presupuesto válido...`);
       setTimeout(() => {
         setMensaje(0);
         setPresupuesto("");
       }, 2000);
       return;
     }
-    setPresupuesto("");
+
     setValido(true);
   };
 
@@ -33,16 +33,25 @@ const NuevoPresupuesto = ({ presupuesto, setPresupuesto, setValido }) => {
             Definir Presupuesto
           </label>
           <input
-            className="border-b-2 border-green-700 w-full my-2 p-3 text-center"
+            className="focus:ring-1 focus:ring-green-700 focus:outline-none appearance-none leading-6
+            border-b-2 border-green-700 w-full my-2 p-3 text-center"
             type="text"
             placeholder="Presupuesto Inicial"
             value={presupuesto}
             onChange={(e) => setPresupuesto(e.target.value)}
           />
+
           <input
             type="submit"
             value="Iniciar"
-            className="w-full bg-green-700 mt-5 py-2 text-white text-xl cursor-pointer transition-all hover:bg-green-600"
+            className="w-1/2
+            bg-green-700 mt-5 py-2 
+            text-white 
+            text-xl 
+            cursor-pointer 
+            transition-all 
+            hover:bg-green-600
+            shadow-md shadow-green-600"
           />
         </form>
       </div>
