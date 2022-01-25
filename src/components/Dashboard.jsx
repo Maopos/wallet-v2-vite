@@ -1,7 +1,7 @@
 import nuevoGasto from "../img/nuevo-gasto.svg";
 import Modal from "./Modal";
 
-const Dashboard = ({ presupuesto, setModal, modal }) => {
+const Dashboard = ({ presupuesto, setModal, modal, guardarGasto }) => {
   const formatoMoneda = (cantidad) => {
     return cantidad.toLocaleString("en-US", {
       style: "currency",
@@ -15,7 +15,7 @@ const Dashboard = ({ presupuesto, setModal, modal }) => {
 
   return (
     <div>
-      <div className={modal && "blur"}>
+      <div className={modal ? "blur" : ""}>
         <div className="mt-5 mx-5 md:w-1/2 md:mx-auto shadow-sm shadow-green-700 py-5 md:py-16 px-5 md:px-20 text-center md:flex">
           <div className="md:w-1/2">
             <h3>Grafico</h3>
@@ -48,7 +48,7 @@ const Dashboard = ({ presupuesto, setModal, modal }) => {
           />
         </div>
       </div>
-      {modal && <Modal setModal={setModal} />}
+      {modal && <Modal setModal={setModal} guardarGasto={guardarGasto} />}
     </div>
   );
 };

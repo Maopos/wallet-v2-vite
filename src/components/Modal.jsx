@@ -1,18 +1,37 @@
 import { useState } from "react";
+import Mensaje from "./Mensaje";
 import cerrarBtn from "../img/cerrar.svg";
 
-const Modal = ({ setModal }) => {
+const Modal = ({ setModal, guardarGasto }) => {
   //
   const [nombre, setNombre] = useState("");
   const [cantidad, setCantidad] = useState("");
   const [categoria, setCategoria] = useState("");
 
+  const [mensaje, setMensaje] = useState("");
+
   const ocultarModal = () => {
     setModal(false);
   };
 
+  const generateId = () => {
+    const random = Math.random().toString(36).substring(2);
+    const dateNow = Date.now().toString(36);
+    return random + dateNow;
+  };
+
   const onSubmit = (e) => {
     e.preventDefault();
+
+    if ([nombre, cantidad, categoria].includes("")) {
+      setMensaje("Debes llenar todos los campos...");
+      setTimeout(() => {
+        setMensaje("");
+      }, 1500);
+      return;
+    }
+    guardarGasto({ nombre, cantidad, categoria, id: generateId() });
+    setModal(false);
   };
 
   return (
@@ -21,17 +40,23 @@ const Modal = ({ setModal }) => {
         <img
           src={cerrarBtn}
           alt="icono cerrar"
-          className="absolute top-5 right-5 md:top-20 md:right-20 w-5 cursor-pointer"
+          className="absolute top-5 right-5 md:top-5 md:right-20 w-5 cursor-pointer"
           onClick={ocultarModal}
         />
       </div>
       <form onSubmit={onSubmit}>
-        <div className="bg-white mt-36 md:w-96 md:mx-auto mx-5">
+        <div className="bg-slate-50 mt-36 md:w-96 md:mx-auto mx-5 shadow-2xl">
           <div className="py-5">
             <legend className="text-center text-green-700 text-xl border-b-2 border-green-700 mx-5">
               Nuevo Gasto
             </legend>
             <div className="m-5">
+              {mensaje ? (
+                <Mensaje
+                  msg={mensaje}
+                  style="bg-red-300 text-red-900 w-full mb-5 py-2 text-center"
+                />
+              ) : null}
               <label htmlFor="nombre" className="text-green-700">
                 Nombre
               </label>
