@@ -18,6 +18,7 @@ const App = () => {
           presupuesto={presupuesto}
           setPresupuesto={setPresupuesto}
           setValido={setValido}
+          
         />
       )}
     </div>

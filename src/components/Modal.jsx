@@ -1,6 +1,12 @@
+import { useState } from "react";
 import cerrarBtn from "../img/cerrar.svg";
 
 const Modal = ({ setModal }) => {
+  //
+  const [nombre, setNombre] = useState("");
+  const [cantidad, setCantidad] = useState("");
+  const [categoria, setCategoria] = useState("");
+
   const ocultarModal = () => {
     setModal(false);
   };
@@ -10,7 +16,7 @@ const Modal = ({ setModal }) => {
   };
 
   return (
-    <div className="bg-black/10 absolute top-0 left-0 bottom-0 right-0">
+    <div className="bg-black/0 absolute top-0 left-0 bottom-0 right-0">
       <div>
         <img
           src={cerrarBtn}
@@ -34,6 +40,8 @@ const Modal = ({ setModal }) => {
                 id="nombre"
                 className="modal-input"
                 placeholder="Nombre del gasto"
+                value={nombre}
+                onChange={(e) => setNombre(e.target.value)}
               />
             </div>
             <div className="m-5">
@@ -45,6 +53,8 @@ const Modal = ({ setModal }) => {
                 id="cantidad"
                 className="modal-input"
                 placeholder="Cantidad del gasto"
+                value={cantidad}
+                onChange={(e) => setCantidad(e.target.value)}
               />
             </div>
             <div className="m-5">
@@ -54,6 +64,8 @@ const Modal = ({ setModal }) => {
               <select
                 id="categoria"
                 className="modal-input"
+                value={categoria}
+                onChange={(e) => setCategoria(e.target.value)}
               >
                 <option value="">-- Selecciona --</option>
                 <option value="ahorro">Ahorro</option>
