@@ -15,7 +15,7 @@ const Modal = ({ setModal }) => {
         <img
           src={cerrarBtn}
           alt="icono cerrar"
-          className="absolute top-5 right-5 md:top-20 md:right-20 w-5 "
+          className="absolute top-5 right-5 md:top-20 md:right-20 w-5 cursor-pointer"
           onClick={ocultarModal}
         />
       </div>
@@ -32,8 +32,7 @@ const Modal = ({ setModal }) => {
               <input
                 type="text"
                 id="nombre"
-                className="focus:ring-1 focus:ring-yellow-400 focus:outline-none
-                w-full ring-1 ring-green-700 p-2"
+                className="modal-input"
                 placeholder="Nombre del gasto"
               />
             </div>
@@ -44,8 +43,7 @@ const Modal = ({ setModal }) => {
               <input
                 type="number"
                 id="cantidad"
-                className="focus:ring-1 focus:ring-yellow-400 focus:outline-none
-                w-full ring-1 ring-green-700 p-2"
+                className="modal-input"
                 placeholder="Cantidad del gasto"
               />
             </div>
@@ -55,8 +53,7 @@ const Modal = ({ setModal }) => {
               </label>
               <select
                 id="categoria"
-                className="focus:ring-1 focus:ring-yellow-400 focus:outline-none
-                w-full ring-1 ring-green-700 p-2"
+                className="modal-input"
               >
                 <option value="">-- Selecciona --</option>
                 <option value="ahorro">Ahorro</option>

@@ -51,7 +51,8 @@ const NuevoPresupuesto = ({ presupuesto, setPresupuesto, setValido }) => {
             cursor-pointer 
             transition-all 
             hover:bg-green-600
-            shadow-md shadow-green-600"
+            shadow-md shadow-green-600
+          "
           />
         </form>
       </div>
