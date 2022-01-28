@@ -30,7 +30,13 @@ const Modal = ({ setModal, guardarGasto }) => {
       }, 1500);
       return;
     }
-    guardarGasto({ nombre, cantidad, categoria, id: generateId() });
+    guardarGasto({
+      nombre,
+      cantidad,
+      categoria,
+      id: generateId(),
+      fecha: Date.now(),
+    });
     setModal(false);
   };
 
@@ -88,7 +94,7 @@ const Modal = ({ setModal, guardarGasto }) => {
               </label>
               <select
                 id="categoria"
-                className="modal-input"
+                className="modal-input cursor-pointer"
                 value={categoria}
                 onChange={(e) => setCategoria(e.target.value)}
               >
