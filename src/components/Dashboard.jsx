@@ -23,19 +23,19 @@ const Dashboard = ({ presupuesto, setModal, modal, guardarGasto }) => {
           <div className="md:w-1/2 text-left">
             <p className="font-semibold text-green-700 my-5">
               Presupuesto:{" "}
-              <span className="text-black font-thin">
+              <span className="text-black font-thin text-2xl">
                 {formatoMoneda(Number(presupuesto))}
               </span>
             </p>
             <p className="font-semibold text-green-700 my-5">
               Gastos:{" "}
-              <span className="text-black font-thin">
+              <span className="text-black font-thin text-2xl">
                 {formatoMoneda(Number(0))}
               </span>
             </p>
             <p className="font-semibold text-green-700 my-5">
               Saldo:{" "}
-              <span className="text-black font-thin">
+              <span className="text-black font-thin text-2xl">
                 {formatoMoneda(Number(0))}
               </span>
             </p>
