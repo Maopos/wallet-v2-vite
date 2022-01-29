@@ -25,6 +25,7 @@ const App = () => {
             setModal={setModal}
             modal={modal}
             guardarGasto={guardarGasto}
+            gastos={gastos}
           />
           <main>
             <ListadoGastos gastos={gastos} modal={modal} />

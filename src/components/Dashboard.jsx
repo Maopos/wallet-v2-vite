@@ -1,7 +1,22 @@
+import { useState, useEffect } from "react";
 import nuevoGasto from "../img/nuevo-gasto.svg";
 import Modal from "./Modal";
 
-const Dashboard = ({ presupuesto, setModal, modal, guardarGasto }) => {
+const Dashboard = ({ presupuesto, setModal, modal, guardarGasto, gastos }) => {
+  const [disponible, setDisponible] = useState(0);
+  const [gastado, setGastado] = useState(0);
+
+  useEffect(() => {
+    const totalGastos = gastos.reduce(
+      (total, i) => Number(i.cantidad) + total,
+      0
+    );
+    const totalDisponible = presupuesto - totalGastos;
+
+    setGastado(totalGastos);
+    setDisponible(totalDisponible);
+  }, [gastos]);
+
   const formatoMoneda = (cantidad) => {
     return cantidad.toLocaleString("en-US", {
       style: "currency",
@@ -30,13 +45,13 @@ const Dashboard = ({ presupuesto, setModal, modal, guardarGasto }) => {
             <p className="font-semibold text-green-700 my-5">
               Gastos:{" "}
               <span className="text-black font-thin text-2xl">
-                {formatoMoneda(Number(0))}
+                {formatoMoneda(Number(gastado))}
               </span>
             </p>
             <p className="font-semibold text-green-700 my-5">
               Saldo:{" "}
               <span className="text-black font-thin text-2xl">
-                {formatoMoneda(Number(0))}
+                {formatoMoneda(Number(disponible))}
               </span>
             </p>
           </div>
