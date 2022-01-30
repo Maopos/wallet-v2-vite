@@ -2,7 +2,14 @@ import { useState, useEffect } from "react";
 import nuevoGasto from "../img/nuevo-gasto.svg";
 import Modal from "./Modal";
 
-const Dashboard = ({ presupuesto, setModal, modal, guardarGasto, gastos }) => {
+const Dashboard = ({
+  presupuesto,
+  setModal,
+  modal,
+  guardarGasto,
+  gastos,
+  gastoEditar,
+}) => {
   const [disponible, setDisponible] = useState(0);
   const [gastado, setGastado] = useState(0);
 
@@ -63,7 +70,13 @@ const Dashboard = ({ presupuesto, setModal, modal, guardarGasto, gastos }) => {
           />
         </div>
       </div>
-      {modal && <Modal setModal={setModal} guardarGasto={guardarGasto} />}
+      {modal && (
+        <Modal
+          setModal={setModal}
+          guardarGasto={guardarGasto}
+          gastoEditar={gastoEditar}
+        />
+      )}
     </div>
   );
 };

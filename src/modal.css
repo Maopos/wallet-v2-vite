@@ -7,16 +7,13 @@
   --negro: #000;
 }
 
-
-/* 
-
-
-.CircularProgressbar .CircularProgressbar-text {
+/* .CircularProgressbar .CircularProgressbar-text {
   font-size: 1rem !important;
 }*/
 
 /* SWIPE LIST OVERRIDES  */
-/* .swipe-action__leading {
+
+.swipe-action__leading {
   background-color: var(--azul);
   color: var(--blanco);
   margin-bottom: 2rem;
@@ -34,4 +31,4 @@
   align-items: center;
   font-size: 2.4rem;
   text-align: right;
-}  */
+}
