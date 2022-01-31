@@ -2,7 +2,13 @@ import { useState, useEffect } from "react";
 import Mensaje from "./Mensaje";
 import cerrarBtn from "../img/cerrar.svg";
 
-const Modal = ({ setModal, guardarGasto, gastoEditar, setGastoEditar, editarGasto }) => {
+const Modal = ({
+  setModal,
+  guardarGasto,
+  gastoEditar,
+  setGastoEditar,
+  editarGasto,
+}) => {
   //
   const [nombre, setNombre] = useState("");
   const [cantidad, setCantidad] = useState("");
@@ -54,14 +60,12 @@ const Modal = ({ setModal, guardarGasto, gastoEditar, setGastoEditar, editarGast
 
     if (newGasto.id) {
       //actualizar
-      console.log("actualizando");
 
       newGasto.id = id;
       newGasto.fecha = fecha;
       editarGasto(newGasto);
     } else {
       //crear nuevo gasto
-      console.log("nuevo");
 
       newGasto.id = generateId();
       newGasto.fecha = Date.now();

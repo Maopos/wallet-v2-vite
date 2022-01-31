@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+    background: rgb(249, 255, 249);
+}
+
 .modal-input {
     @apply focus:ring-1 focus:ring-yellow-400 focus:outline-none w-full ring-1 ring-green-700 p-2
 }

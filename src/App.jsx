@@ -19,8 +19,6 @@ const App = () => {
   const editarGasto = (gasto) => {
     const filtroDiferentes = gastos.filter((i) => i.id !== gasto.id);
     setGastos([...filtroDiferentes, gasto]);
-    
-
     setGastoEditar({});
   };
 
@@ -29,6 +27,11 @@ const App = () => {
       setModal(true);
     }
   }, [gastoEditar]);
+
+  const eliminarGasto = (id) => {
+    const eliminando = gastos.filter((i) => i.id != id);
+    setGastos(eliminando);
+  };
 
   return (
     <div>
@@ -50,6 +53,7 @@ const App = () => {
               gastos={gastos}
               modal={modal}
               setGastoEditar={setGastoEditar}
+              eliminarGasto={eliminarGasto}
             />
           </main>
         </div>

@@ -17,8 +17,8 @@ import icono_ocio from "../img/icono_ocio.svg";
 import icono_salud from "../img/icono_salud.svg";
 import icono_suscripciones from "../img/icono_suscripciones.svg";
 
-const Gasto = ({ gasto, setGastoEditar }) => {
-  const { nombre, cantidad, categoria, fecha } = gasto;
+const Gasto = ({ gasto, setGastoEditar, eliminarGasto }) => {
+  const { nombre, cantidad, categoria, id, fecha } = gasto;
 
   const formatoMoneda = (cantidad) => {
     return cantidad.toLocaleString("en-US", {
@@ -49,26 +49,40 @@ const Gasto = ({ gasto, setGastoEditar }) => {
 
   const leading = () => (
     <LeadingActions>
-      <SwipeAction onClick={() => setGastoEditar(gasto)}>Editar</SwipeAction>
+      <SwipeAction
+        onClick={() => setGastoEditar(gasto)}
+        className="bg-blue-600 text-white text-2xl p-10"
+      >
+        Editar
+      </SwipeAction>
     </LeadingActions>
   );
 
   const trailing = () => (
     <TrailingActions>
-      <SwipeAction onClick={() => console.log("Eliminar...")}>Eliminar</SwipeAction>
+      <SwipeAction
+        onClick={() => eliminarGasto(id)}
+        destructive={true}
+        className="bg-red-600 text-white text-2xl p-10"
+      >
+        Eliminar
+      </SwipeAction>
     </TrailingActions>
   );
 
   return (
     <SwipeableList>
-      <SwipeableListItem leadingActions={leading()} trailingActions={trailing()}>
+      <SwipeableListItem
+        leadingActions={leading()}
+        trailingActions={trailing()}
+      >
         <div className="md:flex">
           <img
             src={diccionario[categoria]}
             alt="Icono categoria"
             className="w-10 md:w-20 md:pr-4"
           />
-          <div className="md:w-3/4">
+          <div className="">
             <p className="font-bold text-xl">{nombre}</p>
             <p>
               <span className="text-slate-400">Fecha:</span>{" "}
@@ -76,7 +90,7 @@ const Gasto = ({ gasto, setGastoEditar }) => {
             </p>
             <p className="text-lg text-slate-400">{categoria}</p>
           </div>
-          <p className="font-thin md:py-6 md:ml-10 text-xl">
+          <p className="font-thin md:py-6 lg:ml-36 text-xl">
             {formatoMoneda(Number(cantidad))}
           </p>
         </div>

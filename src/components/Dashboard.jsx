@@ -40,7 +40,7 @@ const Dashboard = ({
   return (
     <div>
       <div className={modal ? "blur" : ""}>
-        <div className="mt-5 mx-5 md:w-1/2 md:mx-auto shadow-sm shadow-green-700 py-5 md:py-16 px-5 md:px-20 text-center md:flex">
+        <div className="bg-white mt-5 mx-5 md:w-1/2 md:mx-auto shadow-sm shadow-green-700 py-5 md:py-16 px-5 md:px-20 text-center md:flex">
           <div className="md:w-1/2">
             <h3>Grafico</h3>
           </div>
