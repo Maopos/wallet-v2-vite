@@ -28,6 +28,25 @@ const App = () => {
     }
   }, [gastoEditar]);
 
+  useEffect(() => {
+    const getPresupuestoLS = () => {
+      const presupuestoLs = localStorage.getItem("Presupuesto") ?? "";
+      setPresupuesto(presupuestoLs);
+      presupuestoLs ? setValido(true) : setValido(false);
+    };
+    const getGastosLocalStorage = () => {
+      const gastosLs = JSON.parse(localStorage.getItem("Gastos")) ?? [];
+      setGastos(gastosLs);
+    };
+    getPresupuestoLS();
+    getGastosLocalStorage();
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("Gastos", JSON.stringify(gastos));
+    localStorage.setItem("Presupuesto", presupuesto);
+  }, [gastos, presupuesto]);
+
   const eliminarGasto = (id) => {
     const eliminando = gastos.filter((i) => i.id != id);
     setGastos(eliminando);

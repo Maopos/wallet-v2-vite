@@ -42,8 +42,8 @@ const Dashboard = ({
   return (
     <div>
       <div className={modal ? "blur" : ""}>
-        <div className="bg-white mt-5 mx-5 md:w-1/2 md:mx-auto shadow-sm shadow-green-700 py-5 md:py-16 px-5  text-center md:flex">
-          <div className="md:w-1/2 p-8 md:p-2 md:mr-5">
+        <div className="bg-white mt-5 mx-5 md:w-1/2 md:mx-auto shadow-sm shadow-green-700 py-2 px-5 md:flex">
+          <div className="md:w-1/2 p-8 md:p-10 md:mr-5">
             <CircularProgressbar
               value={(disponible * 100) / presupuesto}
               styles={buildStyles({
