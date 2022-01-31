@@ -2,11 +2,13 @@ import { useState, useEffect } from "react";
 import Mensaje from "./Mensaje";
 import cerrarBtn from "../img/cerrar.svg";
 
-const Modal = ({ setModal, guardarGasto, gastoEditar }) => {
+const Modal = ({ setModal, guardarGasto, gastoEditar, setGastoEditar, editarGasto }) => {
   //
   const [nombre, setNombre] = useState("");
   const [cantidad, setCantidad] = useState("");
   const [categoria, setCategoria] = useState("");
+  const [id, setId] = useState("");
+  const [fecha, setFecha] = useState("");
 
   const [mensaje, setMensaje] = useState("");
 
@@ -15,11 +17,14 @@ const Modal = ({ setModal, guardarGasto, gastoEditar }) => {
       setNombre(gastoEditar.nombre);
       setCantidad(gastoEditar.cantidad);
       setCategoria(gastoEditar.categoria);
+      setId(gastoEditar.id);
+      setFecha(gastoEditar.fecha);
     }
   }, []);
 
   const ocultarModal = () => {
     setModal(false);
+    setGastoEditar({});
   };
 
   const generateId = () => {
@@ -38,13 +43,31 @@ const Modal = ({ setModal, guardarGasto, gastoEditar }) => {
       }, 1500);
       return;
     }
-    guardarGasto({
+
+    const newGasto = {
       nombre,
       cantidad,
       categoria,
-      id: generateId(),
-      fecha: Date.now(),
-    });
+      id,
+      fecha,
+    };
+
+    if (newGasto.id) {
+      //actualizar
+      console.log("actualizando");
+
+      newGasto.id = id;
+      newGasto.fecha = fecha;
+      editarGasto(newGasto);
+    } else {
+      //crear nuevo gasto
+      console.log("nuevo");
+
+      newGasto.id = generateId();
+      newGasto.fecha = Date.now();
+      guardarGasto(newGasto);
+    }
+
     setModal(false);
   };
 
@@ -62,7 +85,7 @@ const Modal = ({ setModal, guardarGasto, gastoEditar }) => {
         <div className="bg-slate-50 mt-36 md:w-96 md:mx-auto mx-5 shadow-2xl">
           <div className="py-5">
             <legend className="text-center text-green-700 text-xl border-b-2 border-green-700 mx-5">
-              Nuevo Gasto
+              {gastoEditar.nombre ? "Editar Gasto" : "Nuevo Gasto"}
             </legend>
             <div className="m-5">
               {mensaje ? (
@@ -119,7 +142,7 @@ const Modal = ({ setModal, guardarGasto, gastoEditar }) => {
             <div className="m-5">
               <input
                 type="submit"
-                value="Añadir gasto"
+                value={gastoEditar.nombre ? "Editar" : "Añadir Gasto"}
                 className="w-full bg-green-700 hover:bg-green-600 border-r-2 border-b-2 hover:border-0 hover:mt-1 hover:-mb-1 hover:-mr-1 hover:ml-1 border-green-900 cursor-pointer text-white py-2 transition-all"
               />
             </div>

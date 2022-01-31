@@ -9,6 +9,8 @@ const Dashboard = ({
   guardarGasto,
   gastos,
   gastoEditar,
+  setGastoEditar,
+  editarGasto
 }) => {
   const [disponible, setDisponible] = useState(0);
   const [gastado, setGastado] = useState(0);
@@ -75,6 +77,9 @@ const Dashboard = ({
           setModal={setModal}
           guardarGasto={guardarGasto}
           gastoEditar={gastoEditar}
+          setGastoEditar={setGastoEditar}
+          gastos={gastos}
+          editarGasto={editarGasto}
         />
       )}
     </div>

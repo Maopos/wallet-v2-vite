@@ -16,6 +16,14 @@ const App = () => {
     setGastoEditar({});
   };
 
+  const editarGasto = (gasto) => {
+    const filtroDiferentes = gastos.filter((i) => i.id !== gasto.id);
+    setGastos([...filtroDiferentes, gasto]);
+    
+
+    setGastoEditar({});
+  };
+
   useEffect(() => {
     if (Object.keys(gastoEditar).length > 0) {
       setModal(true);
@@ -34,6 +42,8 @@ const App = () => {
             guardarGasto={guardarGasto}
             gastos={gastos}
             gastoEditar={gastoEditar}
+            setGastoEditar={setGastoEditar}
+            editarGasto={editarGasto}
           />
           <main>
             <ListadoGastos
