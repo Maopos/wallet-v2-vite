@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import nuevoGasto from "../img/nuevo-gasto.svg";
 import Modal from "./Modal";
+import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
+import "react-circular-progressbar/dist/styles.css";
 
 const Dashboard = ({
   presupuesto,
@@ -10,7 +12,7 @@ const Dashboard = ({
   gastos,
   gastoEditar,
   setGastoEditar,
-  editarGasto
+  editarGasto,
 }) => {
   const [disponible, setDisponible] = useState(0);
   const [gastado, setGastado] = useState(0);
@@ -40,9 +42,18 @@ const Dashboard = ({
   return (
     <div>
       <div className={modal ? "blur" : ""}>
-        <div className="bg-white mt-5 mx-5 md:w-1/2 md:mx-auto shadow-sm shadow-green-700 py-5 md:py-16 px-5 md:px-20 text-center md:flex">
-          <div className="md:w-1/2">
-            <h3>Grafico</h3>
+        <div className="bg-white mt-5 mx-5 md:w-1/2 md:mx-auto shadow-sm shadow-green-700 py-5 md:py-16 px-5  text-center md:flex">
+          <div className="md:w-1/2 p-8 md:p-2 md:mr-5">
+            <CircularProgressbar
+              value={(disponible * 100) / presupuesto}
+              styles={buildStyles({
+                pathColor: "green",
+                trailColor: "rgb(255, 99, 99)",
+                textColor: "green",
+                textSize: ".5rem",
+              })}
+              text={`Disponible ${(disponible * 100) / presupuesto}%`}
+            />
           </div>
           <div className="md:w-1/2 text-left">
             <p className="font-semibold text-green-700 my-5">
