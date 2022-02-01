@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Dashboard from "./components/Dashboard";
+import Filtros from "./components/Filtros";
 import Header from "./components/Header";
 import ListadoGastos from "./components/ListadoGastos";
 import NuevoPresupuesto from "./components/NuevoPresupuesto";
@@ -10,6 +11,8 @@ const App = () => {
   const [modal, setModal] = useState(false);
   const [gastos, setGastos] = useState([]);
   const [gastoEditar, setGastoEditar] = useState({});
+  const [filtro, setFiltro] = useState("");
+  const [gastosFiltrados, setGastosFiltrados] = useState([]);
 
   const guardarGasto = (gasto) => {
     setGastos([...gastos, gasto]);
@@ -47,6 +50,15 @@ const App = () => {
     localStorage.setItem("Presupuesto", presupuesto);
   }, [gastos, presupuesto]);
 
+  useEffect(() => {
+    if (filtro) {
+      const gastosFiltrados = gastos.filter((i) => i.categoria === filtro);
+      setGastosFiltrados(gastosFiltrados);
+    } else {
+      setGastosFiltrados([]);
+    }
+  }, [filtro]);
+
   const eliminarGasto = (id) => {
     const eliminando = gastos.filter((i) => i.id != id);
     setGastos(eliminando);
@@ -66,13 +78,19 @@ const App = () => {
             gastoEditar={gastoEditar}
             setGastoEditar={setGastoEditar}
             editarGasto={editarGasto}
+            setGastos={setGastos}
+            setPresupuesto={setPresupuesto}
+            setValido={setValido}
           />
           <main>
+            <Filtros modal={modal} filtro={filtro} setFiltro={setFiltro} />
             <ListadoGastos
               gastos={gastos}
               modal={modal}
               setGastoEditar={setGastoEditar}
               eliminarGasto={eliminarGasto}
+              filtro={filtro}
+              gastosFiltrados={gastosFiltrados}
             />
           </main>
         </div>

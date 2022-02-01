@@ -38,13 +38,13 @@ const Gasto = ({ gasto, setGastoEditar, eliminarGasto }) => {
   };
 
   const diccionario = {
-    ahorro: icono_ahorro,
-    comida: icono_comida,
-    casa: icono_casa,
-    salud: icono_salud,
-    mensual: icono_suscripciones,
-    ocio: icono_ocio,
-    otros: icono_gastos,
+    Ahorro: icono_ahorro,
+    Alimentación: icono_comida,
+    Hogar: icono_casa,
+    Salud: icono_salud,
+    Mensual: icono_suscripciones,
+    Ocio: icono_ocio,
+    Otros: icono_gastos,
   };
 
   const leading = () => (
