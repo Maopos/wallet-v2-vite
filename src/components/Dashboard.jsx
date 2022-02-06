@@ -3,7 +3,14 @@ import Listado from "./Listado";
 import nuevo from "../img/add_page.ico";
 import Modal from "./Modal";
 
-const Dashboard = ({ presupuesto, gastos, setGastos }) => {
+const Dashboard = ({
+  presupuesto,
+  gastos,
+  setGastos,
+  gastoEditar,
+  setGastoEditar,
+  eliminarGasto,
+}) => {
   const [modal, setModal] = useState(false);
   const [disponible, setDisponible] = useState(0);
   const [gastado, setGastado] = useState(0);
@@ -13,6 +20,12 @@ const Dashboard = ({ presupuesto, gastos, setGastos }) => {
     setGastado(result);
     setDisponible(presupuesto - result);
   }, [gastos]);
+
+  useEffect(() => {
+    if (Object.keys(gastoEditar).length > 0) {
+      setModal(true);
+    }
+  }, [gastoEditar]);
 
   return (
     <div>
@@ -53,10 +66,20 @@ const Dashboard = ({ presupuesto, gastos, setGastos }) => {
             />
           </div>
         </div>
-        <Listado gastos={gastos} />
+        <Listado
+          gastos={gastos}
+          setGastoEditar={setGastoEditar}
+          eliminarGasto={eliminarGasto}
+        />
       </div>
       {modal ? (
-        <Modal setModal={setModal} gastos={gastos} setGastos={setGastos} />
+        <Modal
+          setModal={setModal}
+          gastos={gastos}
+          setGastos={setGastos}
+          gastoEditar={gastoEditar}
+          setGastoEditar={setGastoEditar}
+        />
       ) : null}
     </div>
   );

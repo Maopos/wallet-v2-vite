@@ -8,7 +8,7 @@ import mensual from "../img/calendar.ico";
 import ocio from "../img/film.ico";
 import otros from "../img/pin.ico";
 
-const Gasto = ({ gasto }) => {
+const Gasto = ({ gasto, setGastoEditar, eliminarGasto }) => {
   const { nombre, cantidad, categoria, id, fecha } = gasto;
 
   let icono = "";
@@ -53,11 +53,14 @@ const Gasto = ({ gasto }) => {
           src={editar}
           alt="editar"
           className="w-10 h-10 md:my-auto cursor-pointer ml-2 m-2"
-        />
+          onClick={() => setGastoEditar(gasto)}
+          />
         <img
           src={borrar}
           alt="borrar"
           className="w-10 h-10 md:my-auto cursor-pointer ml-2"
+          onClick={() => eliminarGasto(id)}
+
         />
       </div>
     </div>

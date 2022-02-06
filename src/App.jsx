@@ -7,7 +7,12 @@ function App() {
   const [presupuesto, setPresupuesto] = useState("");
   const [valido, setValido] = useState(false);
   const [gastos, setGastos] = useState([]);
-  
+  const [gastoEditar, setGastoEditar] = useState({});
+
+  const eliminarGasto = (id) => {
+    const gastosSinEliminado = gastos.filter((i) => i.id != id);
+    setGastos(gastosSinEliminado);
+  };
 
   return (
     <div className="bg-gray-100 h-full pb-5">
@@ -17,6 +22,9 @@ function App() {
           presupuesto={presupuesto}
           gastos={gastos}
           setGastos={setGastos}
+          gastoEditar={gastoEditar}
+          setGastoEditar={setGastoEditar}
+          eliminarGasto={eliminarGasto}
         />
       ) : (
         <PresupuestoInicial

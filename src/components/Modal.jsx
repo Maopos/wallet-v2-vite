@@ -1,15 +1,32 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import cerrar from "../img/delete.ico";
 import Mensaje from "./Mensaje";
 
-const Modal = ({ setModal, gastos, setGastos }) => {
+const Modal = ({
+  setModal,
+  gastos,
+  setGastos,
+  gastoEditar,
+  setGastoEditar,
+}) => {
   //
   const [nombre, setNombre] = useState("");
   const [cantidad, setCantidad] = useState("");
   const [categoria, setCategoria] = useState("");
+  const [id, setId] = useState("");
   const [fecha, setFecha] = useState("");
 
   const [error, setError] = useState(false);
+
+  useEffect(() => {
+    if (Object.keys(gastoEditar).length > 0) {
+      setNombre(gastoEditar.nombre);
+      setCantidad(gastoEditar.cantidad);
+      setCategoria(gastoEditar.categoria);
+      setId(gastoEditar.id);
+      setFecha(gastoEditar.fecha);
+    }
+  }, []);
 
   const generateId = () => {
     const random = Math.random().toString(36).substring(2);
@@ -19,6 +36,7 @@ const Modal = ({ setModal, gastos, setGastos }) => {
 
   const handleClose = () => {
     setModal(false);
+    setGastoEditar({});
   };
 
   let msg = "";
@@ -26,7 +44,7 @@ const Modal = ({ setModal, gastos, setGastos }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if ([nombre, cantidad, categoria].includes("") ) {
+    if ([nombre, cantidad, categoria].includes("")) {
       setError(true);
       setTimeout(() => {
         setError(false);
@@ -38,11 +56,21 @@ const Modal = ({ setModal, gastos, setGastos }) => {
       nombre,
       cantidad,
       categoria,
-      id: generateId(),
-      fecha: Date.now(),
+      id,
+      fecha,
     };
 
-    setGastos([...gastos, nuevoGasto]);
+    if (nuevoGasto.id) {
+      nuevoGasto.id = id;
+      nuevoGasto.fecha = fecha;
+      const filtroDiferentes = gastos.filter((i) => i.id !== nuevoGasto.id);
+      setGastos([...filtroDiferentes, nuevoGasto]);
+      setGastoEditar({});
+    } else {
+      nuevoGasto.id = generateId();
+      nuevoGasto.fecha = Date.now();
+      setGastos([...gastos, nuevoGasto]);
+    }
 
     setModal(false);
   };
@@ -102,7 +130,8 @@ const Modal = ({ setModal, gastos, setGastos }) => {
           <input
             type="submit"
             value="Guardar"
-            className="bg-blue-700 text-white mt-5 font-thin w-11/12 py-2 rounded-md text-lg"
+            className="bg-blue-700 text-white mt-5 font-normal w-11/12 py-2 
+            rounded-md text-lg cursor-pointer hover:bg-blue-200 hover:text-blue-900 hover:font-medium transition-all"
           />
         </div>
       </form>
