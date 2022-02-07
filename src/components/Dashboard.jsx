@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import Listado from "./Listado";
 import nuevo from "../img/add_page.ico";
 import Modal from "./Modal";
+import Filtros from "./Filtros";
 
 const Dashboard = ({
   presupuesto,
@@ -10,6 +11,9 @@ const Dashboard = ({
   gastoEditar,
   setGastoEditar,
   eliminarGasto,
+  filtro,
+  setFiltro,
+  gastosFiltrados,
 }) => {
   const [modal, setModal] = useState(false);
   const [disponible, setDisponible] = useState(0);
@@ -66,10 +70,13 @@ const Dashboard = ({
             />
           </div>
         </div>
+        <Filtros filtro={filtro} setFiltro={setFiltro} />
         <Listado
           gastos={gastos}
           setGastoEditar={setGastoEditar}
           eliminarGasto={eliminarGasto}
+          filtro={filtro}
+          gastosFiltrados={gastosFiltrados}
         />
       </div>
       {modal ? (
