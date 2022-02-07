@@ -78,61 +78,71 @@ const Modal = ({
   return (
     <div className="absolute top-0 bottom-0 left-0 right-0">
       <form onSubmit={handleSubmit}>
-        <div className="rounded-xl shadow-md mx-auto px-5 py-10 bg-white md:w-1/2 mt-36 text-center">
-          <label
-            htmlFor="gasto"
-            className="text-blue-700 font-thin mx-10 text-xl"
-          >
-            Nuevo Gasto
-          </label>
-          <img
-            src={cerrar}
-            alt="cerrar"
-            className="w-10 absolute right-4 md:right-96 top-40 md:top-40 cursor-pointer"
-            onClick={handleClose}
-          />
-          {error ? (
-            <Mensaje
-              style="w-11/12 mx-auto py-2 rounded-md bg-yellow-200 mt-5 text-yellow-800"
-              msg="Debes llenar todos los campos..."
+        <div className="rounded-xl shadow-md mx-auto px-5 py-10 bg-white md:w-1/2 mt-36">
+          <center>
+            <label htmlFor="gasto" className="text-blue-700 font-thin text-xl">
+              {Object.keys(gastoEditar).length > 0
+                ? "Editar Gasto"
+                : "Nuevo Gasto"}
+            </label>
+            <img
+              src={cerrar}
+              alt="cerrar"
+              className="w-10 absolute right-4 md:right-96 top-40 md:top-40 cursor-pointer"
+              onClick={handleClose}
             />
-          ) : null}
-          <input
-            type="text"
-            className="w-11/12 border-2 p-2 mx-auto mt-5 rounded-md text-sm"
-            placeholder="Ingresa un nuevo gasto"
-            value={nombre}
-            onChange={(e) => setNombre(e.target.value)}
-          />
-          <input
-            type="text"
-            className="w-11/12 border-2 p-2 mx-auto mt-5 rounded-md text-sm"
-            placeholder="Cantidad"
-            value={cantidad}
-            onChange={(e) => setCantidad(e.target.value)}
-          />
-          <select
-            name="categoria"
-            id="categoria"
-            className="w-11/12 border-2 p-2 mx-auto mt-5 rounded-md text-sm"
-            value={categoria}
-            onChange={(e) => setCategoria(e.target.value)}
-          >
-            <option value="">-- Categoria --</option>
-            <option value="Ahorro">Ahorro</option>
-            <option value="Alimentación">Alimentación</option>
-            <option value="Hogar">Hogar</option>
-            <option value="Salud">Salud</option>
-            <option value="Mensual">Mensual</option>
-            <option value="Ocio">Ocio</option>
-            <option value="Otros">Otros</option>
-          </select>
-          <input
-            type="submit"
-            value="Guardar"
-            className="bg-blue-700 text-white mt-5 font-normal w-11/12 py-2 
+            {error ? (
+              <Mensaje
+                style="w-11/12 mx-auto py-2 rounded-md bg-yellow-200 mt-5 text-yellow-800"
+                msg="Debes llenar todos los campos..."
+              />
+            ) : null}
+            <div className="mt-5">
+              <input
+                id="nombre"
+                type="text"
+                className="w-11/12 border-2 p-2 mx-auto rounded-md text-sm"
+                placeholder="Ingresa un nuevo gasto"
+                value={nombre}
+                onChange={(e) => setNombre(e.target.value)}
+              />
+            </div>
+            <div className="mt-5">
+              <input
+                type="text"
+                className="w-11/12 border-2 p-2 mx-autorounded-md text-sm"
+                placeholder="Cantidad"
+                value={cantidad}
+                onChange={(e) => setCantidad(e.target.value)}
+              />
+            </div>
+            <div className="mt-5">
+              <select
+                name="categoria"
+                id="categoria"
+                className="w-11/12 border-2 p-2 mx-auto rounded-md text-sm"
+                value={categoria}
+                onChange={(e) => setCategoria(e.target.value)}
+              >
+                <option value="">-- Selecciona --</option>
+                <option value="Ahorro">Ahorro</option>
+                <option value="Alimentación">Alimentación</option>
+                <option value="Hogar">Hogar</option>
+                <option value="Salud">Salud</option>
+                <option value="Mensual">Mensual</option>
+                <option value="Ocio">Ocio</option>
+                <option value="Otros">Otros</option>
+              </select>
+            </div>
+          </center>
+          <center>
+            <input
+              type="submit"
+              value={Object.keys(gastoEditar).length > 0 ? "Editar" : "Guardar"}
+              className="bg-blue-700 text-white mt-5 font-normal w-11/12 py-2 
             rounded-md text-lg cursor-pointer hover:bg-blue-200 hover:text-blue-900 hover:font-medium transition-all"
-          />
+            />
+          </center>
         </div>
       </form>
     </div>

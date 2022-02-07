@@ -3,6 +3,8 @@ import Listado from "./Listado";
 import nuevo from "../img/add_page.ico";
 import Modal from "./Modal";
 import Filtros from "./Filtros";
+import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
+import "react-circular-progressbar/dist/styles.css";
 
 const Dashboard = ({
   presupuesto,
@@ -35,12 +37,24 @@ const Dashboard = ({
     <div>
       <div className={modal ? "blur" : null}>
         <div className="mt-5 rounded-xl shadow-md mx-5 p-5 bg-white md:w-1/2 md:mx-auto">
-          <div className="px-5 md:px-32">
+          <div className="px-5 ">
             <div className="text-center font-thin text-blue-800 mb-5 text-xl">
               Dashboard
             </div>
             <div className="md:flex">
-              <div className="w-full md:w-1/2 p-2">grafico</div>
+              <div className="w-full md:w-1/2 px-10">
+                <CircularProgressbar
+                  value={(disponible * 100) / presupuesto}
+                  styles={buildStyles({
+                    pathColor: "green",
+                    trailColor: "rgb(255, 99, 99)",
+                    textColor: disponible < 0 ? "red" : "green",
+                    textSize: ".5rem",
+                  })}
+                  text={`Disponible ${(disponible * 100) / presupuesto}%`}
+                  counterClockwise="true"
+                />
+              </div>
               <div className="w-full md:w-1/2 p-2 text-blue-800 font-normal">
                 <p>
                   Presupuesto:{" "}
@@ -54,9 +68,15 @@ const Dashboard = ({
                     ${gastado}
                   </span>
                 </p>
-                <p>
+                <p className={disponible < 0 ? "text-red-600" : 'text-blue-800'}>
                   Disponible:{" "}
-                  <span className="text-black font-thin text-xl">
+                  <span
+                    className={
+                      disponible < 0
+                        ? "text-red-600 font-thin text-xl"
+                        : "text-black font-thin text-xl"
+                    }
+                  >
                     ${disponible}
                   </span>
                 </p>
@@ -65,12 +85,12 @@ const Dashboard = ({
             <img
               src={nuevo}
               alt="nuevo"
-              className="w-10 absolute right-12 md:right-96 top-72 md:top-64 cursor-pointer"
+              className="w-10 absolute right-12 md:right-96 top-48 md:top-64 cursor-pointer"
               onClick={() => setModal(true)}
             />
           </div>
         </div>
-        <Filtros filtro={filtro} setFiltro={setFiltro} />
+        <Filtros gastos={gastos} filtro={filtro} setFiltro={setFiltro} />
         <Listado
           gastos={gastos}
           setGastoEditar={setGastoEditar}
